@@ -4,7 +4,7 @@ export default {
     rollupOptions: {
       input: {
         index: 'index.html',
-        test: 'test.html'
+        spiral: 'spiral.html'
       }
     }
   }
