@@ -40,8 +40,8 @@ const animate = function() {
   shapes.forEach((shape, index) => {
     shape.rotateX(Math.random()/100)
     shape.position.setZ(shape.position.z + 5)
-    if (shape.position.z >= 900) { 
-      shape.position.z = 1000
+    if (shape.position.z >= 6000) { 
+      shape.position.z = 7000
       scene.remove(shape)
       shapes[index].remove()
       return
@@ -62,8 +62,8 @@ const createShape = function(x,y) {
   }
   const geometries = [
     // new ConeGeometry(100, 150, 320),
-    // new BoxGeometry(150, 150, 150),
-    new SphereGeometry(50 + growth, 50 + growth, 50 + growth)
+    new BoxGeometry(150, 150, 150),
+    // new SphereGeometry(50 + growth, 50 + growth, 50 + growth)
   ]
 
   const randomNumber = Math.floor(Math.random() * geometries.length)
@@ -75,7 +75,9 @@ const createShape = function(x,y) {
     emissive: emmisiveColor
   })
   const shape = new Mesh(geometries[randomNumber], material)
-  shape.rotateX(10)
+  shape.rotateX(Math.random() * 10)
+  shape.rotateZ(Math.random() * 10)
+
   shape.position.set((window.innerWidth/2) - x, (window.innerHeight/2) - y, camera.position.z + 500)
 
   shapes.push(shape)
