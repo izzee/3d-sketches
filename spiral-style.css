@@ -11,3 +11,20 @@ body {
 canvas {
   image-rendering: pixelated;
 }
+
+.error-message {
+  font-family: Helvetica;
+  padding: 20px;
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  color: black;
+  font-size: 4vw;
+
+  p {
+    margin-top: 16px;
+  }
+}
