@@ -8,7 +8,7 @@ import {
   MeshLambertMaterial,
   PerspectiveCamera, 
   Scene, 
-  TorusKnotGeometry,
+  TorusGeometry,
   WebGLRenderer,
 } from 'three'
 import WebGL from 'three/addons/capabilities/WebGL.js';
@@ -107,6 +107,12 @@ const runAnimations = () => {
 
 
   gltfLoader.load('../bust.glb', (gltf) => {
+    gltf.scene.traverse( function ( child ) {
+      if ( child.isMesh ) {
+          child.geometry.center(); // center here
+      }
+    });
+    gltf.scene.scale.set(10,10,10) // scale here
     loadGroup.add(gltf.scene)
     // motion one animation after object loads in
     animate((t) => {

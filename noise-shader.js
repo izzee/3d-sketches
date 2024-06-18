@@ -94,7 +94,7 @@ float fbm(vec3 x) {
           fbm(vec3(vUv.x, vUv.y, 0.0 + time * 0.01) * dAmount)
         ),
         mix(
-          -1.0 * dSize * aspectRatio, 
+          -1.0 * dSize * aspectRatio , 
           dSize * aspectRatio, 
           fbm(vec3(vUv.x, vUv.y, 0.0 + time * 0.01) * dAmount)
         )

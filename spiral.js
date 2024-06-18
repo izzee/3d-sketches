@@ -15,7 +15,9 @@ import {
 import WebGL from 'three/addons/capabilities/WebGL.js';
 
 
+
 const runAnimations = () => {
+  let direction = 1
   const renderer = new WebGLRenderer({
     antialias: true
   })
@@ -43,8 +45,8 @@ const runAnimations = () => {
     requestAnimationFrame(animate)
     shapes.forEach((shape, index) => {
       shape.rotateX(Math.random()/100)
-      shape.position.setZ(shape.position.z + 5)
-      if (shape.position.z >= 6000) { 
+      shape.position.setZ(shape.position.z + (5 * lineDirection))
+      if (Math.abs(shape.position.z) >= 6000) { 
         shape.position.z = 7000
         scene.remove(shape)
         shapes[index].remove()
@@ -55,7 +57,7 @@ const runAnimations = () => {
   animate()
   
   let growth = 0
-  let direction = 1
+  let lineDirection = 1
   
   const createShape = function(x,y) {
     growth += direction * 10
@@ -65,7 +67,7 @@ const runAnimations = () => {
       direction = +1
     }
     const geometries = [
-      new BoxGeometry(150, 150, 150),
+      new BoxGeometry(50, 50, 50),
       // new ConeGeometry(100, 150, 320),
       // new SphereGeometry(50 + growth, 50 + growth, 50 + growth)
     ]
@@ -95,7 +97,14 @@ const runAnimations = () => {
     createShape(event.pageX,event.pageY)
   })
   document.addEventListener('mousedown', () => {
-    mouseIsDown = true
+    if (lineDirection === 1) {
+      lineDirection = -1
+      renderer.setClearColor(0x000000, 1)
+    } else {
+      lineDirection = 1
+      renderer.setClearColor(0xffff00, 1)
+    }
+
   })
   
   document.addEventListener('mouseup', () => {
@@ -130,5 +139,4 @@ if ( WebGL.isWebGLAvailable() ) {
 
 } else {
   document.querySelector('.error-message').style.display = 'block'
-
 }
